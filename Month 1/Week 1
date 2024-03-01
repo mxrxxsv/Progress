@@ -1,1 +1,208 @@
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
 
+
+public class Main_Application extends JFrame  implements ActionListener{
+
+	private JMenuBar jmbMenu;
+	private JMenu jmFile, jmEdit, jmView, jmOpen;
+	private JMenuItem jmiExit, jmiWelcome, jmiConverter;
+
+	public Main_Application(){
+
+		jmbMenu = new JMenuBar();
+		jmFile = new JMenu("File");
+		jmEdit = new JMenu("Edit");
+		jmView = new JMenu("View");
+		jmOpen = new JMenu("Open");
+
+		jmiExit = new JMenuItem("Exit", 'E');
+		
+		jmiWelcome = new JMenuItem("Welcome", 'W');
+		jmiConverter = new JMenuItem("Converter", 'C');
+
+
+		setVisible(true);
+		setSize(800, 500);
+		setJMenuBar(jmbMenu);
+		setTitle("My Application");
+		setLocationRelativeTo(null);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		
+
+		jmbMenu.add(jmFile);
+		jmbMenu.add(jmEdit);
+		jmbMenu.add(jmView);
+
+		jmFile.add(jmOpen);
+		jmFile.addSeparator();
+		jmFile.add(jmiExit);
+
+		jmOpen.add(jmiWelcome);
+		jmOpen.addSeparator();
+		jmOpen.add(jmiConverter);
+
+		jmFile.setMnemonic('F');
+		jmEdit.setMnemonic('E');
+		jmView.setMnemonic('V');	
+		jmOpen.setMnemonic('O');
+
+
+		jmiWelcome.addActionListener(this);
+		jmiConverter.addActionListener(this);
+		jmiExit.addActionListener(this);
+	}
+
+
+	public void actionPerformed(ActionEvent e){
+		Object source = e.getSource();
+
+		if(source == jmiWelcome){
+			new Welcome();
+		}
+
+		if(source == jmiConverter){
+			new Converter();
+		}
+
+		if(source == jmiExit) {
+			System.exit(0);
+		}
+	}
+
+
+	public static void main(String[] args){
+
+		Main_Application mainApp = new Main_Application();
+
+	}
+
+}
+
+
+
+//Menu File For Java GUI
+
+//
+
+import java.awt.*;
+import javax.swing.*;
+
+public class Welcome extends JFrame{
+
+	private JLabel jlbWelcome;	
+	private Font fSans;
+
+	public Welcome(){
+
+		setTitle("Welcome");
+		setSize(800,600);
+		setVisible(true);
+		setLocationRelativeTo(null);
+		// setLayout(new FlowLayout());	
+
+		jlbWelcome = new JLabel("Welcome To My Application");
+		jlbWelcome.setHorizontalAlignment(JLabel.CENTER);
+
+		fSans = new Font("SansSerif",Font.BOLD,50);
+
+		add(jlbWelcome);
+		jlbWelcome.setFont(fSans);
+
+		jlbWelcome.setForeground(Color.CYAN);
+		getContentPane().setBackground(Color.DARK_GRAY);
+		
+	}
+
+	public static void main(String[] args){
+		Welcome wFrame = new Welcome();
+	}
+}
+
+
+//Welcome File for Java GUI
+
+//
+
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+public class Converter extends JFrame implements ActionListener{
+	private JLabel jlCentemeter, jlMeter;
+	private JTextField jtfCentemeter, jtfMeter;
+	private JButton jbCount, jbClear;
+
+	public Converter() {
+
+		jlCentemeter = new JLabel("Centemeter");
+		jlMeter = new JLabel("Meter");
+
+		jtfCentemeter = new JTextField(20);
+		jtfMeter = new JTextField(20);
+
+		jbCount = new JButton("Count");
+		jbClear = new JButton("Clear");
+
+		setVisible(true);
+		setSize(200, 300);
+		setTitle("Converter");
+		setLocationRelativeTo(null);
+		setLayout(new FlowLayout());
+
+		add(jlCentemeter);
+		add(jtfCentemeter);
+		add(jlMeter);
+		add(jtfMeter);
+		add(jbCount);
+		add(jbClear);
+
+		jbCount.addActionListener(this);
+		jbClear.addActionListener(this);
+
+	}
+
+
+
+
+	public void actionPerformed(ActionEvent e) {
+		Object source = e.getSource();
+
+		if(source == jbCount){
+			double Cnum, count;
+
+			if(jtfCentemeter.getText().equals("")){
+				JOptionPane.showMessageDialog(this, "Invalid");
+			} else {
+
+			Cnum = Double.parseDouble(jtfCentemeter.getText());
+
+			count = Cnum / 100;
+
+			
+
+			jtfMeter.setText(String.valueOf(count));
+			
+			}
+			
+		}
+
+		if(source == jbClear){
+			jtfCentemeter.setText("");
+			jtfMeter.setText("");
+		}
+	}
+
+	public static void main(String[] args) {
+
+
+	}
+
+	
+}
+
+//Converter File for Java GUI
+
+//
